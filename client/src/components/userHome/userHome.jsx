@@ -132,7 +132,7 @@ function UserHome() {
                     </div>
                 </div>
                 <div className='apply'>
-                    {(status === "Not sent" || "pending") ? <button onClick={handleUser} className='btn btn-success application-btn'>Send Application</button> : null }
+                    {((status === "Not sent") || (status === "pending")) ? <button onClick={handleUser} className='btn btn-success application-btn'>Send Application</button> : <button className='btn btn-success application-btn disabled'>Send Application</button> }
                 </div>
             </div>
             <div className='application-status'>
