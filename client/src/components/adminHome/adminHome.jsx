@@ -20,7 +20,7 @@ function AdminHome() {
 
     useEffect(() => {
         if (!localStorage.getItem("nxtechAdmin")) {
-            navigate("/userhome");
+            navigate("/admin");
         }
         handlePending();
     }, [])
