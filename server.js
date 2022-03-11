@@ -109,13 +109,13 @@ app.put("/userServer/:id", async (req, res) => {
     }
 });
 
-app.get("/applicationsServer/:query", async (req, res) => {
+app.get("/applicationsServer/:cas", async (req, res) => {
     try {
         //console.log(req.body);
-        const { query } = req.params;
+        const { cas } = req.params;
         const candidateList = await pool.query(
             "SELECT candidate_id, candidateName, email, phone, areaOfInterest FROM candidate WHERE currentStatus = $1",
-            [query]
+            [cas]
         );
         //console.log(updateCandidate);
         if (candidateList.rowCount !== 0) res.send({ status: true, message: "Candidates found", list: candidateList.rows });

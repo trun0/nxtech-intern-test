@@ -22,7 +22,7 @@ function AdminHome() {
         if (!localStorage.getItem("nxtechAdmin")) {
             navigate("/admin");
         }
-        handlePending();
+        initializeList("pending", setPending);
     }, [])
 
     function logout() {
@@ -36,9 +36,10 @@ function AdminHome() {
                 //console.log(response.data);
                 if (response.data.status) {
                     myCallback(response.data.list);
-                    setMaxPage(Math.ceil(response.data.list.length * 0.2));
                 }
+                else myCallback([]);
                 setMessage(type);
+                setMaxPage(Math.ceil(response.data.list ? (response.data.list.length * 0.2) : 1));
             })
             .catch(function (error) {
                 console.log(error);

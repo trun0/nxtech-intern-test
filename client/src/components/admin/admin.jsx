@@ -3,12 +3,14 @@ import checkInputValidity from "../inputValidityChecker";
 import React, { useState, useEffect } from "react";
 import bcrypt from "bcryptjs";
 import axios from "axios";
+import Loading from "../loading";
 import { useNavigate } from "react-router-dom";
 import baseUrl from "../baseUrl";
 
 function Admin(props) {
     const [adminUsername, setAdminUsername] = useState("");
     const [adminPassword, setAdminPassword] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
 
@@ -27,6 +29,7 @@ function Admin(props) {
 
     function handleAdmin() {
         if (checkInputValidity()) {
+            setLoading(true);
             axios
                 .post(baseUrl + "adminServer", {
                     userName: adminUsername
@@ -44,9 +47,11 @@ function Admin(props) {
                     } else {
                         alert(response.data.message);
                     }
+                    setLoading(false);
                 })
                 .catch(function (error) {
                     console.log(error);
+                    setLoading(false);
                 });
         }
     }
@@ -58,44 +63,46 @@ function Admin(props) {
                 <h6>Admin</h6>
             </div>
 
-            <form className="">
-                <label className="required">
-                    <i className="fas fa-user mb-2"></i> Username
-                </label>
-                <input
-                    onChange={handleUser}
-                    type="text"
-                    className="form-control username"
-                    name="username"
-                    placeholder="Enter Username"
-                    value={adminUsername}
-                    autoComplete="off"
-                    required
-                ></input>
+            {loading ? <Loading text="Logging In" /> :
+                <form className="">
+                    <label className="required">
+                        <i className="fas fa-user mb-2"></i> Username
+                    </label>
+                    <input
+                        onChange={handleUser}
+                        type="text"
+                        className="form-control username"
+                        name="username"
+                        placeholder="Enter Username"
+                        value={adminUsername}
+                        autoComplete="off"
+                        required
+                    ></input>
 
-                <label className="required">
-                    <i className="fas fa-lock mb-2"></i> Password
-                </label>
-                <input
-                    onChange={handlePass}
-                    type="password"
-                    className="form-control password"
-                    name="password"
-                    placeholder="Enter Password"
-                    value={adminPassword}
-                    autoComplete="off"
-                    required
-                ></input>
+                    <label className="required">
+                        <i className="fas fa-lock mb-2"></i> Password
+                    </label>
+                    <input
+                        onChange={handlePass}
+                        type="password"
+                        className="form-control password"
+                        name="password"
+                        placeholder="Enter Password"
+                        value={adminPassword}
+                        autoComplete="off"
+                        required
+                    ></input>
 
-                <button
-                    onClick={handleAdmin}
-                    type="button"
-                    className="btn btn-primary button"
-                    name="button"
-                >
-                    LOGIN
-                </button>
-            </form>
+                    <button
+                        onClick={handleAdmin}
+                        type="button"
+                        className="btn btn-primary button"
+                        name="button"
+                    >
+                        LOGIN
+                    </button>
+                </form>
+            }
         </div>
     );
 }
