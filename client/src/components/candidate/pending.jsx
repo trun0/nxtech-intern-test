@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "./candidate.css";
 import axios from "axios";
+import baseUrl from '../baseUrl';
 
 function Pending(props) {
 
@@ -15,7 +16,7 @@ function Pending(props) {
 
     function handleApprove(id) {
         axios
-            .put("http://localhost:8000" + "/applications/" + id, {
+            .put(baseUrl + "applications/" + id, {
                 currentStatus: "approved"
             })
             .then(function (response) {
@@ -33,7 +34,7 @@ function Pending(props) {
 
     function handleReject(id) {
         axios
-            .put("http://localhost:8000" + "/applicationsServer/" + id, {
+            .put(baseUrl + "applicationsServer/" + id, {
                 currentStatus: "rejected"
             })
             .then(function (response) {
