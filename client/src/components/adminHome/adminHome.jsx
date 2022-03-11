@@ -36,9 +36,9 @@ function AdminHome() {
                 //console.log(response.data);
                 if (response.data.status) {
                     myCallback(response.data.list);
-                    setMessage(type);
                     setMaxPage(Math.ceil(response.data.list.length * 0.2));
                 }
+                setMessage(type);
             })
             .catch(function (error) {
                 console.log(error);
