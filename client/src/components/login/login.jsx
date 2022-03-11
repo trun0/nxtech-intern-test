@@ -50,7 +50,6 @@ function Login(props) {
                     console.log(error);
                 });
         }
-        else alert("Try again. Please don't leave empty fields")
     }
 
     return (
