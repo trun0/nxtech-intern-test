@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Approved from '../candidate/approved';
 import Pending from '../candidate/pending';
 import Rejected from '../candidate/rejected';
+import baseUrl from '../baseUrl';
 
 function AdminHome() {
 
@@ -27,7 +28,7 @@ function AdminHome() {
     }
 
     function initializeList(type, myCallback) {
-        axios.get("http://localhost:8000" + "/applicationsServer/" + type)
+        axios.get(baseUrl + "applicationsServer/" + type)
             .then(function (response) {
                 //console.log(response.data);
                 if (response.data.status) {
@@ -78,9 +79,6 @@ function AdminHome() {
     function handleNext() {
         if (pageNo < maxPage) setPageNo(pageNo + 1);
         else alert("No more entries");
-    }
-    function handlePageNo(e) {
-        setPageNo(e.target.value);
     }
 
     return (

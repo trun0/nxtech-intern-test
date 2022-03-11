@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import bcrypt from "bcryptjs";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import baseUrl from "../baseUrl";
 
 function Login(props) {
     const [loginUsername, setLoginUsername] = useState("");
@@ -28,7 +29,7 @@ function Login(props) {
     function handleLogin() {
         if (checkInputValidity()) {
             axios
-                .post("http://localhost:8000" + "/loginServer", {
+                .post(baseUrl + "loginServer", {
                     userName: loginUsername
                 })
                 .then(function (response) {

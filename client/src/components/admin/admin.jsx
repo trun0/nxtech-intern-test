@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import bcrypt from "bcryptjs";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import baseUrl from "../baseUrl";
 
 function Admin(props) {
     const [adminUsername, setAdminUsername] = useState("");
@@ -27,7 +28,7 @@ function Admin(props) {
     function handleAdmin() {
         if (checkInputValidity()) {
             axios
-                .post("http://localhost:8000" + "/adminServer", {
+                .post(baseUrl + "adminServer", {
                     userName: adminUsername
                 })
                 .then(function (response) {

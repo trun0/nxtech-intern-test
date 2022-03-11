@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import "./userHome.css";
 import checkInputValidity from '../inputValidityChecker';
 import axios from "axios";
+import baseUrl from '../baseUrl';
 
 function UserHome() {
 
@@ -20,7 +21,7 @@ function UserHome() {
     function initialize() {
         if (localStorage.getItem("nxtechUser")) {
             axios
-                .get("http://localhost:8000" + "/userServer/" + localStorage.getItem("nxtechUser"))
+                .get(baseUrl + "userServer/" + localStorage.getItem("nxtechUser"))
                 .then(function (response) {
                     if (response.data.status) {
                         //alert(response.data.message);
@@ -46,7 +47,7 @@ function UserHome() {
     function handleUser() {
         if (checkInputValidity()) {
             axios
-                .put("http://localhost:8000" + "/userServer/" + localStorage.getItem("nxtechUser"), {
+                .put(baseUrl + "userServer/" + localStorage.getItem("nxtechUser"), {
                     candidateName: name,
                     email: email,
                     phone: phone,
@@ -69,7 +70,7 @@ function UserHome() {
 
     function handleDelete() {
         axios
-            .delete("http://localhost:8000" + "/applicationsServer/" + localStorage.getItem("nxtechUser"))
+            .delete(baseUrl + "applicationsServer/" + localStorage.getItem("nxtechUser"))
             .then(function (response) {
                 if (response.data.status) {
                     //alert(response.data.message);

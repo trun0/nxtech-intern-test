@@ -4,6 +4,7 @@ import checkInputValidity from "../inputValidityChecker";
 import bcrypt from "bcryptjs";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import baseUrl from "../baseUrl";
 
 function Signup() {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ function Signup() {
     bcrypt.hash(signupPassword, 8, function (err, hash) {
       if (err) alert(err.message);
       else {
-        axios.post("http://localhost:8000" + "/signupServer", {
+        axios.post(baseUrl + "signupServer", {
           userName: signupUsername,
           userPassword: hash
         })
